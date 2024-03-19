@@ -1,55 +1,55 @@
-<mxfile host="Electron" modified="2024-03-19T11:43:45.317Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.21 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="MS5YJohPicvVrD-bNs7T" version="22.1.21" type="device" pages="2">
+<mxfile host="Electron" modified="2024-03-19T13:03:10.700Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.21 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="A6p7Mgx9mNSO3qZ4-cn8" version="22.1.21" type="device" pages="2">
   <diagram name="Функциональная схема" id="fEoVKGhcsDBPrD8bhwiE">
-    <mxGraphModel dx="1604" dy="843" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1364" dy="843" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="P8vYlNOxn4U069fjqmDx-1" value="Сканирование главного файла зависимостей в корне проекта&lt;br&gt;***.gdm" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-1" value="Сканирование главного файла зависимостей в корне проекта&lt;br&gt;***.gdm" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="80" y="120" width="150" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-2" value="Функции" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-2" value="Функции" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="300" y="30" width="290" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-4" value="Контроль системных файлов программы" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-4" value="Контроль системных файлов программы" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="120" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-5" value="Создание списка зависимостей" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-5" value="Создание списка зависимостей" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="240" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-6" value="Обновление списка зависимостей" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-6" value="Обновление списка зависимостей" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="360" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-7" value="Рекурсивное сравнение зависимостей&amp;nbsp;&lt;br&gt;***.gdm" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-7" value="Рекурсивное сравнение зависимостей&amp;nbsp;&lt;br&gt;***.gdm" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="80" y="360" width="150" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-8" value="Проверка конфликтов версий каждого репозитория" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-8" value="Проверка конфликтов версий каждого репозитория" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="80" y="600" width="150" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-9" value="Перезапись версии репозитория" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-9" value="Перезапись версии репозитория" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="80" y="800" width="150" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-10" value="Обновление программы" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-10" value="Обновление программы" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="640" y="120" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-11" value="Подкачка новых версий компонентов" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-11" value="Подкачка новых версий компонентов" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="480" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-12" value="Проверка того, что репозитории не изменены" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-12" value="Проверка того, что репозитории не изменены" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="720" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-13" value="Рекурсивный комит репозиториев?" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-13" value="Рекурсивный комит репозиториев?" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="840" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="P8vYlNOxn4U069fjqmDx-14" value="Выдача информации о программе" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="P8vYlNOxn4U069fjqmDx-14" value="Выдача информации о программе" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="640" y="240" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="2cuGCMvpLtIxKLtLSZvA-1" value="Рекурсиваня подкачка новых компонентов" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="2cuGCMvpLtIxKLtLSZvA-1" value="Рекурсиваня подкачка новых компонентов" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="600" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="2cuGCMvpLtIxKLtLSZvA-2" value="Анализ способа скачивания&lt;br&gt;https/ssh" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="2cuGCMvpLtIxKLtLSZvA-2" value="Анализ способа скачивания&lt;br&gt;https/ssh" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="80" y="920" width="150" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="2cuGCMvpLtIxKLtLSZvA-3" value="Проверка наличия компонента из зависимости" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="2cuGCMvpLtIxKLtLSZvA-3" value="Проверка наличия компонента из зависимости" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="400" y="960" width="200" height="80" as="geometry" />
         </mxCell>
       </root>
