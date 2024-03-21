@@ -8,10 +8,16 @@ set(TARGET_NAME gdm)
 
 set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/main
+    ${CMAKE_SOURCE_DIR}/components/comp_struct
+    ${CMAKE_SOURCE_DIR}/components/component
+    ${CMAKE_SOURCE_DIR}/components/gdm_file
 )
 
 add_executable(${TARGET_NAME} 
     ${CMAKE_SOURCE_DIR}/main/main.cpp
+    ${CMAKE_SOURCE_DIR}/components/comp_struct/comp_struct.cpp
+    ${CMAKE_SOURCE_DIR}/components/component/component.cpp
+    ${CMAKE_SOURCE_DIR}/components/gdm_file/gdm_file.cpp
 )
 
 target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRECTORIES})

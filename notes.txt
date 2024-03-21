@@ -1,0 +1,1 @@
+git clone --no-checkout --depth 1 https://github.com/torvalds/linux - позволит склонировать только head
