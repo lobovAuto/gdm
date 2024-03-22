@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(TARGET_NAME gdm)
 
 set(INCLUDE_DIRECTORIES
+    ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/main
     ${CMAKE_SOURCE_DIR}/components/comp_struct
     ${CMAKE_SOURCE_DIR}/components/component

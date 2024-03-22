@@ -44,6 +44,7 @@ Component GdmFile::get_comp(){
     delete_first_spaces(read_line);
         // std::cout<<"updt string: "<<read_line<<std::endl;
     RepoAddrInternet repo_addr_intenet(std::string(read_line, 0, read_line.find_first_of(" ")));
+    
     return Component();
 }
 
