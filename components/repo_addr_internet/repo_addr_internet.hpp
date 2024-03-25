@@ -4,7 +4,7 @@
 #include "iostream"
 #include "config.h"
 
-extern std::string home_repo;
+namespace repo_{
 
 enum class RepoConnectionType{
     https,
@@ -22,8 +22,10 @@ private:
     RepoConnectionType repo_type;
 public:
     RepoAddrInternet(std::string &);
-    RepoAddrInternet(std::string);
+    RepoAddrInternet(const std::string);
     bool check_addr();
+    std::string return_addr(){return addr;};
     ~RepoAddrInternet();
 };
+}
 

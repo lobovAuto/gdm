@@ -12,6 +12,17 @@ GdmFile::GdmFile(){
         std::cerr<<"There is no main project file."<<std::endl;
         exit(1);
     }
+    is_file = true;
+    path = std::filesystem::absolute(std::filesystem::path("project.gdm"));
+}
+
+GdmFile::GdmFile(std::string in_path){
+    std::string curr_path = in_path + "component.gdm";
+    file.open(curr_path);
+    if(not file.is_open()){
+        is_file = false;
+    } else is_file = true;
+    path = std::filesystem::absolute(std::filesystem::path(curr_path));
 }
 
 bool GdmFile::garbage_string_skip(){
@@ -43,9 +54,22 @@ Component GdmFile::get_comp(){
         // std::cout<<"read string: "<<read_line<<std::endl;
     delete_first_spaces(read_line);
         // std::cout<<"updt string: "<<read_line<<std::endl;
-    RepoAddrInternet repo_addr_intenet(std::string(read_line, 0, read_line.find_first_of(" ")));
-    
-    return Component();
+    repo_::RepoAddrInternet repo_addr_intenet(std::string(read_line, 0, read_line.find_first_of(" ")));
+        if (repo_addr_intenet.check_addr()==false){
+            return Component();
+        }
+    read_line.erase(0,read_line.find_first_of(" ")+1);
+        // std::cout<<"cut string: "<<read_line<<std::endl;
+    repo_::RepoAddrProject repo_addr_project(std::string(read_line, 0, read_line.find_first_of(" ")));
+    read_line.erase(0,read_line.find_first_of(" ")+1);
+        // std::cout<<"cut string: "<<read_line<<std::endl;
+    repo_::RepoBranch repo_branch(std::string(read_line, 0, read_line.find_first_of(" ")));
+        // std::cout<<"cut string: "<<read_line<<std::endl;
+    repo_::RepoHints repo_hints(read_line);
+    return Component(repo_addr_intenet.return_addr(),
+                        repo_addr_project.return_addr(),
+                        path,
+                        repo_branch.return_branch());
 }
 
 GdmFile::~GdmFile(){

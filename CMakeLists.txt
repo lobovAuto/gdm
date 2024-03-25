@@ -15,7 +15,7 @@ set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/components/repo_addr_internet
     ${CMAKE_SOURCE_DIR}/components/repo_addr_project
     ${CMAKE_SOURCE_DIR}/components/repo_branch
-    ${CMAKE_SOURCE_DIR}/components/repo_branch_type
+    ${CMAKE_SOURCE_DIR}/components/repo_hints
 )
 
 add_executable(${TARGET_NAME} 
@@ -26,7 +26,7 @@ add_executable(${TARGET_NAME}
     ${CMAKE_SOURCE_DIR}/components/repo_addr_internet/repo_addr_internet.cpp
     ${CMAKE_SOURCE_DIR}/components/repo_addr_project/repo_addr_project.cpp
     ${CMAKE_SOURCE_DIR}/components/repo_branch/repo_branch.cpp
-    ${CMAKE_SOURCE_DIR}/components/repo_branch_type/repo_branch_type.cpp
+    ${CMAKE_SOURCE_DIR}/components/repo_hints/repo_hints.cpp
 )
 
 target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRECTORIES})

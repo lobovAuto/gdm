@@ -1,6 +1,6 @@
 #include "repo_addr_internet.hpp"
 
-void RepoAddrInternet::check_type_repo(){
+void repo_::RepoAddrInternet::check_type_repo(){
     std::string https_prefix(addr, 0, 5);
     if (https_prefix=="https"){
         repo_type=RepoConnectionType::https;
@@ -29,13 +29,13 @@ void RepoAddrInternet::check_type_repo(){
     addr = HOME_REPO + addr;
 }
 
-RepoAddrInternet::RepoAddrInternet(std::string & input):addr(input){
+repo_::RepoAddrInternet::RepoAddrInternet(std::string & input):addr(input){
 }
-RepoAddrInternet::RepoAddrInternet(std::string  input):addr(input){
+repo_::RepoAddrInternet::RepoAddrInternet(const std::string  input):addr(input){
     check_type_repo();
 }
 
-bool RepoAddrInternet::check_addr(){
+bool repo_::RepoAddrInternet::check_addr(){
     std::string git_suffix (addr, addr.size()-4);
     if (git_suffix!=".git"){
         return false;
@@ -43,5 +43,5 @@ bool RepoAddrInternet::check_addr(){
     return true;
 }
 
-RepoAddrInternet::~RepoAddrInternet(){
+repo_::RepoAddrInternet::~RepoAddrInternet(){
 }

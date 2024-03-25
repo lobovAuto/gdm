@@ -1,9 +1,8 @@
 #include "repo_branch.hpp"
 
-RepoBranch::RepoBranch(/* args */)
-{
+repo_::RepoBranch::RepoBranch(const std::string input):branch(input){
 }
 
-RepoBranch::~RepoBranch()
+repo_::RepoBranch::~RepoBranch()
 {
 }

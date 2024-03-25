@@ -1,9 +1,8 @@
 #include "repo_addr_project.hpp"
 
-RepoAddrProject::RepoAddrProject(/* args */)
-{
+repo_::RepoAddrProject::RepoAddrProject(const std::string input):addr(input){
 }
 
-RepoAddrProject::~RepoAddrProject()
+repo_::RepoAddrProject::~RepoAddrProject()
 {
 }

@@ -1,11 +1,18 @@
 #pragma once
 
+#include "string"
+
+namespace repo_{
+
 class RepoAddrProject
 {
 private:
-    /* data */
+   std::string addr;
 public:
-    RepoAddrProject(/* args */);
+    RepoAddrProject(const std::string);
+    std::string return_addr(){return addr;};
     ~RepoAddrProject();
 };
+
+}
 
