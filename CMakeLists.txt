@@ -6,6 +6,29 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(TARGET_NAME gdm)
 
+set(BUILD_TESTS false) #выключение тестов для более быстрой с борки libgit2
+
+#[===[
+Начало включения библиотеки libgit2
+#]===]
+include(FetchContent)
+FetchContent_Declare(
+    git
+    GIT_REPOSITORY git@github.com:libgit2/libgit2.git
+    GIT_TAG v1.8.0 #последняя актуальная версия на 26 марта 2024 года
+)
+
+FetchContent_GetProperties(git)
+
+if(NOT git_POPULATED)
+    FetchContent_Populate(git)
+    add_subdirectory(${git_SOURCE_DIR} ${git_BINARY_DIR})
+endif()
+#set(BUILD_TESTS true)
+#[===[
+Окончание включния библиотеки libgit2
+#]===]
+
 set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/main
@@ -30,6 +53,7 @@ add_executable(${TARGET_NAME}
 )
 
 target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRECTORIES})
+target_link_libraries(${TARGET_NAME} PRIVATE libgit2package)
 
 target_compile_options(${TARGET_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/W4>
