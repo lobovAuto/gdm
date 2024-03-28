@@ -57,6 +57,7 @@
         "span": "cpp",
         "sstream": "cpp",
         "variant": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "common.h": "c"
     }
 }

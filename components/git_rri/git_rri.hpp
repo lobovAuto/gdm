@@ -1,5 +1,10 @@
 #pragma once
 
+#include "libgit2/common.h"
+#include "libgit2/libgit2.h"
+#include "libgit2/repository.h"
+#include "git2.h"
+#include "git2/types.h"
 #include "rri.hpp"
 
 class GitRri : public Rri

@@ -6,12 +6,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(TARGET_NAME gdm)
 
+#set(UNIX true)
 set(BUILD_TESTS false) #выключение тестов для более быстрой с борки libgit2
+include(FetchContent)
 
 #[===[
 Начало включения библиотеки libgit2
 #]===]
-include(FetchContent)
 FetchContent_Declare(
     git
     GIT_REPOSITORY git@github.com:libgit2/libgit2.git
@@ -32,18 +33,18 @@ endif()
 #[===[
 Начало включения библиотеки fmt
 #]===]
-FetchContent_Declare(
-    fmt
-    GIT_REPOSITORY git@github.com:fmtlib/fmt.git
-    GIT_TAG 10.2.1 #последняя актуальная версия на 26 марта 2024 года
-)
+#FetchContent_Declare(
+#    fmt
+#    GIT_REPOSITORY git@github.com:fmtlib/fmt.git
+#    GIT_TAG 10.2.1 #последняя актуальная версия на 26 марта 2024 года
+#)
 
-FetchContent_GetProperties(fmt)
+#FetchContent_GetProperties(fmt)
 
-if(NOT fmt_POPULATED)
-    FetchContent_Populate(fmt)
-    add_subdirectory(${fmt_SOURCE_DIR} ${fmt_BINARY_DIR})
-endif()
+#if(NOT fmt_POPULATED)
+#    FetchContent_Populate(fmt)
+#    add_subdirectory(${fmt_SOURCE_DIR} ${fmt_BINARY_DIR})
+#endif()
 #[===[
 Окончание включния библиотеки fmt
 #]===]
@@ -51,18 +52,18 @@ endif()
 #[===[
 Начало включения библиотеки boost
 #]===]
-FetchContent_Declare(
-    boost
-    GIT_REPOSITORY git@github.com:boostorg/boost.git
-    GIT_TAG boost-1.84.0 #последняя актуальная версия на 26 марта 2024 года
-)
+#FetchContent_Declare(
+#    boost
+#    GIT_REPOSITORY git@github.com:boostorg/boost.git
+#    GIT_TAG boost-1.84.0 #последняя актуальная версия на 26 марта 2024 года
+#)
 
-FetchContent_GetProperties(boost)
+#FetchContent_GetProperties(boost)
 
-if(NOT boost_POPULATED)
-    FetchContent_Populate(boost)
-    add_subdirectory(${boost_SOURCE_DIR} ${boost_BINARY_DIR})
-endif()
+#if(NOT boost_POPULATED)
+#    FetchContent_Populate(boost)
+#    add_subdirectory(${boost_SOURCE_DIR} ${boost_BINARY_DIR})
+#endif()
 #[===[
 Окончание включния библиотеки boost
 #]===]
@@ -80,7 +81,14 @@ set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/components/repo_branch
     ${CMAKE_SOURCE_DIR}/components/repo_hints
     ${CMAKE_SOURCE_DIR}/interfaces/rri
-)
+
+    ${git_SOURCE_DIR}/src/
+    ${git_SOURCE_DIR}/src/cli/
+    ${git_SOURCE_DIR}/src/libgit2/
+    ${git_SOURCE_DIR}/src/util/
+    ${git_SOURCE_DIR}/include/
+    ${git_BINARY_DIR}/src/util
+) 
 
 add_executable(${TARGET_NAME} 
     ${CMAKE_SOURCE_DIR}/main/main.cpp
@@ -95,7 +103,9 @@ add_executable(${TARGET_NAME}
 )
 
 target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRECTORIES})
-target_link_libraries(${TARGET_NAME} PRIVATE libgit2package fmt boost_serialization)
+target_link_libraries(${TARGET_NAME} PRIVATE libgit2package)
+#fmt boost_serialization 
+
 
 target_compile_options(${TARGET_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/W4>
