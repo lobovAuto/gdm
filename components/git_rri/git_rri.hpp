@@ -4,8 +4,9 @@
 #define __cplusplus
 #endif
 
-#include "git2.h"
+
 #include "rri.hpp"
+#include "iostream"
 
 class GitRri : public Rri
 {
