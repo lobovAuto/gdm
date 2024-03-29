@@ -82,12 +82,7 @@ set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/components/repo_hints
     ${CMAKE_SOURCE_DIR}/interfaces/rri
 
-    ${git_SOURCE_DIR}/src/
-    ${git_SOURCE_DIR}/src/cli/
-    ${git_SOURCE_DIR}/src/libgit2/
-    ${git_SOURCE_DIR}/src/util/
     ${git_SOURCE_DIR}/include/
-    ${git_BINARY_DIR}/src/util
 ) 
 
 add_executable(${TARGET_NAME} 
