@@ -64,7 +64,7 @@ set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}/components/repo_hints
     ${CMAKE_SOURCE_DIR}/interfaces/rri
 
-    ${git_SOURCE_DIR}/include/
+    ${boost_SOURCE_DIR}/lib/process/include/
 ) 
 
 add_executable(${TARGET_NAME} 

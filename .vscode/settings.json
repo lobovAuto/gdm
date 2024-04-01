@@ -95,6 +95,7 @@
         "valarray": "cpp",
         "spanstream": "cpp",
         "stacktrace": "cpp",
-        "stdfloat": "cpp"
+        "stdfloat": "cpp",
+        "*.ipp": "cpp"
     }
 }
