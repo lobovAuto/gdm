@@ -1,7 +1,7 @@
 #include "gdm_file.hpp"
 
 void delete_first_spaces(std::string & input){
-    if (input.find_first_not_of(" ")==0) return;
+    if ((input.find_first_not_of(" ")==0)||input.find_first_not_of(" ")>1000) return;
     std::string temp(input, input.find_first_not_of(" "), input.size());
     input = temp;
 }

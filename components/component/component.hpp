@@ -41,6 +41,7 @@ public:
     void print_to_screen();
     // перенести в приват 
     CompList comp_list;  // контейнер с данными о том, какие компоненты ссылаются на этот репозиторий
+    bool get_health() const {return !wrong;}
 private:
     bool wrong = false;
     std::string repo_address;    // адресс компонента для скачивания

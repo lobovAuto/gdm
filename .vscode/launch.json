@@ -1,0 +1,12 @@
+{
+    "version" : "0.2.0",
+    "configurations": [
+        {
+            "type": "cppdbg",
+            "name": "Debug",
+            "request": "launch",
+            "cwd": "/home/lobov/workspace/gdm/temp",
+            "program": "/home/lobov/workspace/gdm/build/gdm",
+        }
+    ]
+}
