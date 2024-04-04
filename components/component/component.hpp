@@ -45,6 +45,7 @@ public:
     CompList comp_list;  // контейнер с данными о том, какие компоненты ссылаются на этот репозиторий
     bool get_health() const {return !wrong;}
     bool operator==(const Component&) const;
+    // bool operator!=(const Component & input) const {return !(&this==input);};
     bool addr_is_eq(const Component&) const;
 private:
     bool wrong = false;

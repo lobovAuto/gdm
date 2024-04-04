@@ -60,7 +60,5 @@ bool Component::operator==(const Component & input) const {
         if (get_comp_list()==input.get_comp_list())
             return true;
     }
-    else {
-        return false;
-    }
+    return false;
 }

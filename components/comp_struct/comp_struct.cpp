@@ -29,3 +29,38 @@ void ComponentsStruct::print_struct(){
         std::cout<<"========================================"<<std::endl;
     }
 }
+
+void ComponentsStruct::print_err_res(){
+    for (size_t i=0; i<comp_err.size(); i++){
+        std::cout<<"pos "<<i<<" res "<<comp_err[i]<<std::endl;
+    }
+}
+
+bool ComponentsStruct::chech_struct(){
+    for(size_t i=0; i<components.size(); i++){  // Если вектор ComponentBroadcastUnit единичного размера, то пропускам
+        if (components[i].get_comp_list().size()==1) {
+            comp_err.push_back(true);           // Не забываем эту позицию отметить верной
+            continue;
+        }
+        bool res=false; // временная переменная
+        for (size_t j=0; j<components[i].get_comp_list().size(); j++){ // идем по всем значениям вектора ComponentBroadcastUnit
+            
+            for (size_t k=j+1; k<components[i].get_comp_list().size(); k++){ // сравниваем "взятое" ранее значение со следующим
+                if (not(components[i].get_comp_list()[j]==                   // если они не равны, то поднимаем флаг ошибки
+                        components[i].get_comp_list()[k])){
+                    res = true;
+                    break;
+                }
+                
+            }
+            if (res) break;
+        }
+        if (res) comp_err.push_back(false); // пушим ошибку
+        else comp_err.push_back(true); 
+    }
+
+    for (bool i : comp_err){
+        if (i == false) return false;
+    }
+    return true;
+}
