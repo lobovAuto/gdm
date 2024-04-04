@@ -18,6 +18,8 @@ struct ComponentBroadcastUnit
     std::string address_in_project;// адрес компонента в проекте
     std::string address_call_file; // адрес файла, который ссылается на данный компонент
     std::string branch;            // имя тэга, хэш комита
+
+    bool operator==(const ComponentBroadcastUnit &) const;
 };
 
 typedef std::vector<ComponentBroadcastUnit> CompList;
@@ -36,12 +38,14 @@ public:
     // void add_call_source(const ComponentBroadcastUnit &);
     void add_call_source(const ComponentBroadcastUnit);
     std::string get_repo_address () const {return repo_address;}
-    CompList get_comp_list () const {return comp_list;}
+    const CompList & get_comp_list () const {return comp_list;}
     ComponentBroadcastUnit get_brdunit() const ; 
     void print_to_screen();
     // перенести в приват 
     CompList comp_list;  // контейнер с данными о том, какие компоненты ссылаются на этот репозиторий
     bool get_health() const {return !wrong;}
+    bool operator==(const Component&) const;
+    bool addr_is_eq(const Component&) const;
 private:
     bool wrong = false;
     std::string repo_address;    // адресс компонента для скачивания

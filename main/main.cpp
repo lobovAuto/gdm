@@ -5,6 +5,7 @@ int main(int argc, char* argv[]){
     GdmFile project;
     ComponentsStruct comp_struct;
     Component temp = project.get_comp();
+    
     while (temp.get_health()){
         comp_struct.add_component(temp);
         temp = project.get_comp();

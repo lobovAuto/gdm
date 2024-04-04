@@ -1,5 +1,12 @@
 #include "component.hpp"
 
+bool ComponentBroadcastUnit::operator==(const ComponentBroadcastUnit & input) const {
+    if ((address_in_project==input.address_in_project)&&(branch==input.branch))
+        return true;
+    else 
+        return false;
+}
+
 void Component::print_to_screen (){
     std::cout<<"component: ";
     std::cout<<repo_address<<std::endl;
@@ -39,3 +46,21 @@ ComponentBroadcastUnit Component::get_brdunit() const {
         throw "there are not broadcast unit";
     return comp_list[0];
 } 
+
+bool Component::addr_is_eq(const Component & input) const {
+    std::string input_addr = input.get_repo_address();
+    if ((repo_address == input_addr)){
+        return true;
+    }
+    return false;
+}
+
+bool Component::operator==(const Component & input) const {
+    if ((repo_address == input.get_repo_address())){
+        if (get_comp_list()==input.get_comp_list())
+            return true;
+    }
+    else {
+        return false;
+    }
+}
