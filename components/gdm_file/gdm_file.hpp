@@ -22,6 +22,7 @@ class GdmFile
 private:
     std::fstream file;
     bool is_file;
+    bool is_project_file;
     std::string path;
     bool garbage_string_skip(); // пропускает неинтересующие нас строки
 

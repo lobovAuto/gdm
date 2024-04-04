@@ -28,8 +28,8 @@ void Component::print_to_screen (){
 }
 
 [[deprecated]] void Component::add_call_source(std::string address_in_project, std::string address_call_file, 
-                                /*BranchType branch_type,*/ std::string branch){
-    ComponentBroadcastUnit temp(address_in_project, address_call_file, /*branch_type,*/ branch);
+                                std::string branch, bool is_force){
+    ComponentBroadcastUnit temp(address_in_project, address_call_file, branch, is_force);
     comp_list.push_back(temp);    
 }
 

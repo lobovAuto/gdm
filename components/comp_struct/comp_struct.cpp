@@ -43,8 +43,9 @@ bool ComponentsStruct::chech_struct(){
             continue;
         }
         bool res=false; // временная переменная
+        unsigned force_count=0;
         for (size_t j=0; j<components[i].get_comp_list().size(); j++){ // идем по всем значениям вектора ComponentBroadcastUnit
-            
+            if (components[i].get_comp_list()[j].is_force) force_count++;
             for (size_t k=j+1; k<components[i].get_comp_list().size(); k++){ // сравниваем "взятое" ранее значение со следующим
                 if (not(components[i].get_comp_list()[j]==                   // если они не равны, то поднимаем флаг ошибки
                         components[i].get_comp_list()[k])){
@@ -55,7 +56,7 @@ bool ComponentsStruct::chech_struct(){
             }
             if (res) break;
         }
-        if (res) comp_err.push_back(false); // пушим ошибку
+        if (res && force_count!=1) comp_err.push_back(false); // пушим ошибку
         else comp_err.push_back(true); 
     }
 

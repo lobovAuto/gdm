@@ -17,6 +17,7 @@ private:
     repo_::RepoHintType check_to_hint(const std::string);
 public:
     RepoHints(std::string);
+    bool isforce() const {return is_force;};
     ~RepoHints();
 };
 
