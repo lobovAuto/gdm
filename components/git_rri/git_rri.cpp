@@ -6,6 +6,7 @@ GitRri::GitRri(/* args */)
 
 GitRri::GitRri(std::string url, std::string addr): url(url), location(addr)
 {
+    folder_name = get_folder_name();
 }
 
 GitRri::~GitRri()
@@ -19,8 +20,31 @@ int GitRri::push() {
 int GitRri::pull() {
     return 0;
 }
+
+const std::string GitRri::get_folder_name(){
+    size_t pos;
+    for (pos=location.size();pos>0; pos--){
+        if (location[pos]=='/') break;
+    }
+    return std::string(location, pos+1);
+}
+
 int GitRri::check_repo_to_gdm_files() {
-    return 0;
+    using namespace std::filesystem;
+
+    if (not exists("./.gdm/"+folder_name))
+        create_directory("./.gdm/"+folder_name);
+    else {
+        remove_all("./.gdm/"+folder_name);
+        create_directory("./.gdm/"+folder_name);
+    }
+
+    std::vector<std::string> lines;
+    std::string command = "git clone --depth 1 "+url+" ./.gdm/"+folder_name;
+    // std::cout<<command<<std::endl;
+    boost_command(command.c_str(), lines);
+
+    return exists("./.gdm/"+folder_name+"/component.gdm");
 }
 int GitRri::checkout() {
     return 0;

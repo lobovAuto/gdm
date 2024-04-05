@@ -8,6 +8,7 @@
 #include "rri.hpp"
 #include "iostream"
 #include <vector>
+#include "filesystem"
 
 class GitRri : public Rri
 {
@@ -16,6 +17,8 @@ private:
     int last_result;
     std::string url;
     std::string location;
+    std::string folder_name;
+    const std::string get_folder_name();
 public:
     GitRri(/* args */);
     GitRri(std::string, std::string);
