@@ -9,7 +9,7 @@ public:
     int save(); // сохранить структуру данных
     int load(); // загрузить структуру из файла
     int add_component(const Component &); // добавить файл в структуру
-    bool chech_struct();
+    bool check_struct();
 private:
     unsigned find_component(const Component &) const; // проверить массив на наличие такого компонента
     int expand_components(const Component &, unsigned pos); // добавить данные вызова к существующему компоненту

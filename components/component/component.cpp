@@ -17,6 +17,7 @@ void Component::print_to_screen (){
         std::cout<<"   "<<"project address: "<< comp_list[i].address_in_project <<std::endl;
         std::cout<<"   "<<"file call addr : "<< comp_list[i].address_call_file <<std::endl;
         std::cout<<"   "<<"branch:          "<< comp_list[i].branch <<std::endl;
+        std::cout<<"   "<<"is force:        "<< comp_list[i].is_force <<std::endl;
         /*
         if (iterator->branch_type==BranchType::branch){
             std::cout<<"   "<<"branch type"<<std::endl;

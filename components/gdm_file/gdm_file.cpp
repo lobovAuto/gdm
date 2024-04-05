@@ -66,13 +66,13 @@ Component GdmFile::get_comp(){
     repo_::RepoBranch repo_branch(std::string(read_line, 0, read_line.find_first_of(" ")));
         // std::cout<<"cut string: "<<read_line<<std::endl;
     repo_::RepoHints repo_hints(read_line);
-    // bool isforce = repo_hints.isforce();
-    // if (is_project_file == false) isforce = 0;
+    bool isforce = repo_hints.isforce();
+    if (is_project_file == false) isforce = 0;
     return Component(repo_addr_intenet.return_addr(),
                         repo_addr_project.return_addr(),
                         path,
                         repo_branch.return_branch(),
-                        repo_hints.isforce());
+                        isforce);
 }
 
 GdmFile::~GdmFile(){
