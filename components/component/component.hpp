@@ -46,9 +46,11 @@ public:
     bool get_health() const {return !wrong;}
     bool operator==(const Component&) const;
     bool addr_is_eq(const Component&) const;
+    int check_component() const;
 private:
     bool wrong = false;
     std::string repo_address;    // адресс компонента для скачивания
+    // bool 
     
 };
 

@@ -32,40 +32,35 @@ void ComponentsStruct::print_struct(){
 
 void ComponentsStruct::print_err_res(){
     for (size_t i=0; i<comp_err.size(); i++){
-        std::cout<<"pos "<<i<<" res "<<comp_err[i]<<std::endl;
+        std::cout<<"pos "<<i<<" res "<<!comp_err[i]<<std::endl;
     }
 }
 
+
 bool ComponentsStruct::check_struct(){
     for(size_t i=0; i<components.size(); i++){  // Если вектор ComponentBroadcastUnit единичного размера, то пропускам
-        if (components[i].get_comp_list().size()==1) {
-            comp_err.push_back(true);           // Не забываем эту позицию отметить верной
-            continue;
-        }
-        bool res=false; // временная переменная
-        for (size_t j=0; j<components[i].get_comp_list().size(); j++){ // идем по всем значениям вектора ComponentBroadcastUnit
-            // if (components[i].get_comp_list()[j].is_force) ++force_count;
-            for (size_t k=j+1; k<components[i].get_comp_list().size(); k++){ // сравниваем "взятое" ранее значение со следующим
-                if (not(components[i].get_comp_list()[j]==                   // если они не равны, то поднимаем флаг ошибки
-                        components[i].get_comp_list()[k])){
-                    res = true;
-                    break;
-                }
-            }
-            if (res) break;
-        }
-        unsigned force_count=0;
-        for (size_t j=0; j<components[i].get_comp_list().size(); j++){      // Подсчет хинтов force
-            if (components[i].get_comp_list()[j].is_force) ++force_count;
-        }
-        std::cout<<"force count - "<<force_count<<std::endl;
-        if (force_count==1){ comp_err.push_back(true); } // если есть 1 форс, то ставим true
-        else if (res || force_count > 1){ comp_err.push_back(false); } // пушим ошибку
-        else { comp_err.push_back(true);}
+        int check_result = components[i].check_component();
+        if (check_result){ comp_err.push_back(true); } // если есть ошибка, то ставим true
+        else { comp_err.push_back(false);}
     }
-
     for (bool i : comp_err){
-        if (i == false) return false;
+        if (i == true) return false; // если хотя бы в одном компоненте есть ошибка, выдаем общую ошибку
     }
     return true;
+}
+
+int ComponentsStruct::check_struct_comp_to_reference(){
+    for(unsigned i=0;;){
+        int check_res = components[i].check_component(); // проверяем компонент на коллизии версий
+        if (check_res) continue; // если есть ошибки, то пропускаем этот компонет
+        std::string repo_add = components[i].get_repo_address();
+        GitRri temp_repo();
+        if (++i>=components.size()) break; // остановка по подстижению конца вектора
+    }
+    //идем по каждому компоненту
+    //выкачиваем его и проверяем
+    //если ничего нет, идем дальше
+    //если есть файл, парсим его, добавляем в общую структуру
+    
+    return 0;
 }

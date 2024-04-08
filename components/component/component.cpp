@@ -63,3 +63,33 @@ bool Component::operator==(const Component & input) const {
     }
     return false;
 }
+
+/**
+ * @result 0 - Если ошибок нет,
+ * @result 1 - Если разняться хэши\указатели\ветки
+ * @result 2 - Если force больше 1
+*/
+int Component::check_component() const {
+    if (get_comp_list().size()==1) {
+            return 0;
+    }
+    bool res=false; // временная переменная
+    for (size_t j=0; j<get_comp_list().size(); j++){ // идем по всем значениям вектора ComponentBroadcastUnit
+        for (size_t k=j+1; k<get_comp_list().size(); k++){ // сравниваем "взятое" ранее значение со следующим
+            if (not(get_comp_list()[j]==                   // если они не равны, то поднимаем флаг ошибки
+                    get_comp_list()[k])){
+                res = true;
+                break;
+            }
+        }
+        if (res) break;
+    }
+    unsigned force_count=0;
+    for (size_t j=0; j<get_comp_list().size(); j++){      // Подсчет хинтов force
+        if (get_comp_list()[j].is_force) ++force_count;
+    }
+    if (force_count == 1) return 0;
+    else if (force_count>1) return 2;
+    else if (res) return 1;
+    else return 0;
+}
