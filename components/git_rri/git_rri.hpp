@@ -17,11 +17,12 @@ private:
     int last_result;
     std::string url;
     std::string location;
-    std::string folder_name;
+    std::string branch;
+    std::string folder_name; // имя папки для проверочного выкачивания
     const std::string get_folder_name();
 public:
     GitRri(/* args */);
-    GitRri(std::string, std::string);
+    GitRri(std::string url, std::string location, std::string branch);
     int push();
     int pull();
     int check_repo_to_gdm_files();

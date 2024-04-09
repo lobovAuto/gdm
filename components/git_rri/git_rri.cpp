@@ -4,8 +4,8 @@ GitRri::GitRri(/* args */)
 {
 }
 
-GitRri::GitRri(std::string url, std::string addr): url(url), location(addr)
-{
+GitRri::GitRri(std::string url, std::string addr, std::string branch): 
+                url(url), location(addr), branch(branch){
     folder_name = get_folder_name();
 }
 
@@ -40,7 +40,9 @@ int GitRri::check_repo_to_gdm_files() {
     }
 
     std::vector<std::string> lines;
-    std::string command = "git clone --depth 1 "+url+" ./.gdm/"+folder_name;
+    std::string command = "git clone --depth 1 "+ url;
+    command += " ./.gdm/"+folder_name;
+    command += " -b "+branch;
     // std::cout<<command<<std::endl;
     boost_command(command.c_str(), lines);
 
@@ -68,8 +70,10 @@ int GitRri::boost_command(const char * command, std::vector<std::string> & resul
 
 int GitRri::clone() {
     std::vector<std::string> lines;
-    std::string temp ="git clone "+url+" "+location;
-    int res = boost_command(temp.c_str(), lines);
+    std::string command ="git clone "+url;
+    command += " "+location;
+    command += " -b "+branch;
+    int res = boost_command(command.c_str(), lines);
     // for (std::string t : lines){
         // std::cout<<t<<std::endl;
     // }
