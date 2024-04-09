@@ -9,6 +9,7 @@
 #include "iostream"
 #include <vector>
 #include "filesystem"
+#include "component.hpp"
 
 class GitRri : public Rri
 {
@@ -23,6 +24,7 @@ private:
 public:
     GitRri(/* args */);
     GitRri(std::string url, std::string location, std::string branch);
+    GitRri(const Component &);
     int push();
     int pull();
     int check_repo_to_gdm_files();

@@ -9,6 +9,12 @@ GitRri::GitRri(std::string url, std::string addr, std::string branch):
     folder_name = get_folder_name();
 }
 
+GitRri::GitRri(const Component & component):
+    url(component.get_repo_address()), location("NONE"),
+    branch("NONE"){
+    folder_name = get_folder_name();
+}
+
 GitRri::~GitRri()
 {
 }

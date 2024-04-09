@@ -49,9 +49,9 @@ public:
     int check_component() const;
 private:
     bool wrong = false;
-    std::string repo_address;    // адресс компонента для скачивания
-    // bool 
-    
+    std::string repo_address;    // адрес компонента для скачивания
+    mutable bool is_valid_force; // флаг наличия хинта force
+    mutable unsigned force_pos; // номер форс элемента
 };
 
 std::ostream& operator<<(std::ostream& stream, const Component& component);

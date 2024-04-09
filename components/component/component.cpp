@@ -86,9 +86,15 @@ int Component::check_component() const {
     }
     unsigned force_count=0;
     for (size_t j=0; j<get_comp_list().size(); j++){      // Подсчет хинтов force
-        if (get_comp_list()[j].is_force) ++force_count;
+        if (get_comp_list()[j].is_force) {
+            ++force_count;
+            force_pos = j; // запоминаем позицию форс ComponentBroadcastUnit
+        }
     }
-    if (force_count == 1) return 0;
+    if (force_count == 1) {
+        is_valid_force = 1; // отмечаем в компоненте, что есть валидный force
+        return 0;
+    }
     else if (force_count>1) return 2;
     else if (res) return 1;
     else return 0;
