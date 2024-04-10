@@ -27,7 +27,7 @@ public:
     GitRri(const Component &);
     int push();
     int pull();
-    int check_repo_to_gdm_files();
+    int check_repo_to_gdm_file();
     int checkout();
     int status();
     int clone();

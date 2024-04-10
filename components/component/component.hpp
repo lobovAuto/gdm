@@ -37,8 +37,12 @@ public:
                          std::string branch, bool is_force); // добавить еще один источник ссылки на репозиторий
     // void add_call_source(const ComponentBroadcastUnit &);
     void add_call_source(const ComponentBroadcastUnit);
+
     std::string get_repo_address () const {return repo_address;}
-    const CompList & get_comp_list () const {return comp_list;}
+    std::string get_addr_in_project() const;
+    std::string get_addr_call_file() const;
+    std::string get_branch() const;
+
     ComponentBroadcastUnit get_brdunit() const ; 
     void print_to_screen();
     // перенести в приват 
@@ -48,6 +52,9 @@ public:
     bool addr_is_eq(const Component&) const;
     int check_component() const;
 private:
+
+    const CompList & get_comp_list () const {return comp_list;}
+
     bool wrong = false;
     std::string repo_address;    // адрес компонента для скачивания
     mutable bool is_valid_force; // флаг наличия хинта force

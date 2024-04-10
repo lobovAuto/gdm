@@ -99,3 +99,31 @@ int Component::check_component() const {
     else if (res) return 1;
     else return 0;
 }
+
+std::string Component::get_addr_in_project() const {
+    if (is_valid_force){
+        return comp_list[force_pos].address_in_project;
+    }
+    else {
+        return comp_list[0].address_in_project;
+    }
+    return "";
+}
+std::string Component::get_addr_call_file() const {
+    if (is_valid_force){
+        return comp_list[force_pos].address_call_file;
+    }
+    else {
+        return comp_list[0].address_call_file;
+    }
+    return "";
+}
+std::string Component::get_branch() const {
+    if (is_valid_force){
+        return comp_list[force_pos].branch;
+    }
+    else {
+        return comp_list[0].branch;
+    }
+    return "";
+}

@@ -9,9 +9,9 @@ GitRri::GitRri(std::string url, std::string addr, std::string branch):
     folder_name = get_folder_name();
 }
 
-GitRri::GitRri(const Component & component):
-    url(component.get_repo_address()), location("NONE"),
-    branch("NONE"){
+GitRri::GitRri(const Component & c):
+    url(c.get_repo_address()), location(c.get_addr_call_file()),
+    branch(c.get_branch()){
     folder_name = get_folder_name();
 }
 
@@ -35,7 +35,7 @@ const std::string GitRri::get_folder_name(){
     return std::string(location, pos+1);
 }
 
-int GitRri::check_repo_to_gdm_files() {
+int GitRri::check_repo_to_gdm_file() {
     using namespace std::filesystem;
 
     if (not exists("./.gdm/"+folder_name))
@@ -51,8 +51,8 @@ int GitRri::check_repo_to_gdm_files() {
     command += " -b "+branch;
     // std::cout<<command<<std::endl;
     boost_command(command.c_str(), lines);
-
-    return exists("./.gdm/"+folder_name+"/component.gdm");
+    bool is_component_file = exists("./.gdm/"+folder_name+"/component.gdm");
+    return is_component_file;
 }
 int GitRri::checkout() {
     return 0;

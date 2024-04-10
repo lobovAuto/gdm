@@ -53,9 +53,13 @@ int ComponentsStruct::check_struct_comp_to_reference(){
     for(unsigned i=0;;){
         int check_res = components[i].check_component(); // проверяем компонент на коллизии версий
         if (check_res) continue; // если есть ошибки, то пропускаем этот компонет
-        std::string repo_addr = components[i].get_repo_address();
         
-        GitRri temp_repo();
+        GitRri temp_repo(components[i]);
+        int res = temp_repo.check_repo_to_gdm_file();
+        if (res){ // есть есть подзависимости, парсим их
+            
+        }
+
         if (++i>=components.size()) break; // остановка по подстижению конца вектора
     }
     //идем по каждому компоненту
