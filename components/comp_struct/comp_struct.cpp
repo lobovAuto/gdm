@@ -38,7 +38,7 @@ void ComponentsStruct::print_err_res(){
 
 
 bool ComponentsStruct::check_struct(){
-    for(size_t i=0; i<components.size(); i++){  // Если вектор ComponentBroadcastUnit единичного размера, то пропускам
+    for(size_t i=0; i<components.size(); i++){  
         int check_result = components[i].check_component();
         if (check_result){ comp_err.push_back(true); } // если есть ошибка, то ставим true
         else { comp_err.push_back(false);}
@@ -56,8 +56,13 @@ int ComponentsStruct::check_struct_comp_to_reference(){
         
         GitRri temp_repo(components[i]);
         int res = temp_repo.check_repo_to_gdm_file();
-        if (res){ // есть есть подзависимости, парсим их
-            
+        if (res){ // если есть подзависимости, парсим их
+            GdmFile gdm_component(".dgm/temp_repo.get_folder_name()/");
+            Component temp = gdm_component.get_comp();
+            while (temp.get_health()){
+                add_component(temp);
+                temp = gdm_component.get_comp();
+            } 
         }
 
         if (++i>=components.size()) break; // остановка по подстижению конца вектора
@@ -67,5 +72,14 @@ int ComponentsStruct::check_struct_comp_to_reference(){
     //если ничего нет, идем дальше
     //если есть файл, парсим его, добавляем в общую структуру
     
+    return 0;
+}
+
+int ComponentsStruct::clone_all_components(){
+    int i = 0;
+    for(Component j : components){
+        GitRri temp_repo(j);
+        i = temp_repo.clone();
+    }
     return 0;
 }

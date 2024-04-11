@@ -83,8 +83,8 @@ int GitRri::clone() {
     // for (std::string t : lines){
         // std::cout<<t<<std::endl;
     // }
-    std::cout<<"res is: ";
-    std::cout<<res<<std::endl;
+    // std::cout<<"res is: ";
+    // std::cout<<res<<std::endl;
     
     return 0;
 }

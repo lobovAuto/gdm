@@ -4,6 +4,7 @@
 #include <vector>
 #include "component.hpp"
 #include "git_rri.hpp"
+#include "gdm_file.hpp"
 
 class ComponentsStruct {
 public:
@@ -12,6 +13,7 @@ public:
     int add_component(const Component &); // добавить файл в структуру
     bool check_struct();
     int check_struct_comp_to_reference(); // проверяет все элементы структуры на ссылочные зависимости
+    int clone_all_components(); // скачивает все компоненты
 private:
     unsigned find_component(const Component &) const; // проверить массив на наличие такого компонента
     int expand_components(const Component &, unsigned pos); // добавить данные вызова к существующему компоненту

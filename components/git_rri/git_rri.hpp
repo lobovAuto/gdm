@@ -31,6 +31,9 @@ public:
     int checkout();
     int status();
     int clone();
+
+    const std::string get_folder_name() const {return folder_name;};
+
     ~GitRri();
 };
 
