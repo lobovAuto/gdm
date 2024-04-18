@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 #include "comp_struct.hpp"
 #include "component.hpp"

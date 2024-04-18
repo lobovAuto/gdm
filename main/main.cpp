@@ -6,9 +6,10 @@ int main(int argc, char* argv[]){
     if (not std::filesystem::exists("./.gdm")){
         std::filesystem::create_directory("./.gdm");
     }
-
-    GdmFile project;
-    ComponentsStruct comp_struct;
+    std::ofstream log("./.gdm/log.txt");
+    // std::clog.rdbuf(log.rdbuf());
+    GdmFile project(log);
+    ComponentsStruct comp_struct(log);
     Component temp = project.get_comp();
 
     while (temp.get_health()){

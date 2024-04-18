@@ -25,7 +25,7 @@ int ComponentsStruct::expand_components(const Component & input, unsigned pos){
 void ComponentsStruct::print_struct(){
     std::cout<<"========================================"<<std::endl;
     for(auto i : components){
-        i.print_to_screen();
+        i.print_to_screen(std::cout);
         std::cout<<"========================================"<<std::endl;
     }
 }
@@ -57,7 +57,7 @@ int ComponentsStruct::check_struct_comp_to_reference(){
         GitRri temp_repo(components[i]);
         int res = temp_repo.check_repo_to_gdm_file();
         if (res){ // если есть подзависимости, парсим их
-            GdmFile gdm_component(".dgm/temp_repo.get_folder_name()/");
+            GdmFile gdm_component(".dgm/temp_repo.get_folder_name()/", log_stream);
             Component temp = gdm_component.get_comp();
             while (temp.get_health()){
                 add_component(temp);

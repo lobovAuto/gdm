@@ -7,19 +7,30 @@ bool ComponentBroadcastUnit::operator==(const ComponentBroadcastUnit & input) co
         return false;
 }
 
-void Component::print_to_screen (){
-    std::cout<<"component: ";
-    std::cout<<repo_address<<std::endl;
-    std::cout<<"call counter: "<<get_comp_list().size()<<std::endl;
+void Component::print_to_screen (std::ostream & out){
+    out<<"component: ";
+    out<<repo_address<<std::endl;
+    out<<"call counter: "<<get_comp_list().size()<<std::endl;
     auto iterator  = get_comp_list().begin();
     for (std::size_t i=0; i<get_comp_list().size(); i++){
-        std::cout<<"call "<<i+1<<":"<<std::endl;
-        std::cout<<"   "<<"file call addr : "<< comp_list[i].address_call_file <<std::endl;
-        std::cout<<"   "<<"branch:          "<< comp_list[i].branch <<std::endl;
-        std::cout<<"   "<<"commit:          "<< comp_list[i].commit <<std::endl;
-        std::cout<<"   "<<"is force:        "<< comp_list[i].is_force <<std::endl;
+        out<<"call "<<i+1<<":"<<std::endl;
+        out<<"   "<<"file call addr : "<< comp_list[i].address_call_file <<std::endl;
+        out<<"   "<<"branch:          "<< comp_list[i].branch <<std::endl;
+        out<<"   "<<"commit:          "<< comp_list[i].commit <<std::endl;
+        out<<"   "<<"is force:        "<< comp_list[i].is_force <<std::endl;
         iterator=iterator++;
     }
+}
+void Component::print_for_log(std::ostream & out){
+    out<<"   component: ";
+    out<<repo_address<<std::endl;
+    out<<"   "<<"root_rms: "<<_root_rms<<std::endl;
+    out<<"   "<<"root_folder: "<<_root_folder<<std::endl;
+    out<<"   "<<"is full path: "<<_is_full_path<<std::endl;
+    out<<"   "<<"file call addr : "<< comp_list[0].address_call_file <<std::endl;
+    out<<"   "<<"branch:          "<< comp_list[0].branch <<std::endl;
+    out<<"   "<<"commit:          "<< comp_list[0].commit <<std::endl;
+    out<<"   "<<"is force:        "<< comp_list[0].is_force <<std::endl;
 }
 
 [[deprecated]] void Component::add_call_source(std::string address_in_project, std::string address_call_file, 
