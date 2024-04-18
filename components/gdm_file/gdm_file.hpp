@@ -24,6 +24,8 @@ private:
     bool is_file;
     bool is_project_file;
     std::string path;
+    std::string _root_folder;
+    std::string _root_rms;
     bool garbage_string_skip(); // пропускает неинтересующие нас строки
 
     unsigned int gssnsdl = 1000; // garbage_string_skip_no_space_dist_lim
@@ -31,6 +33,8 @@ public:
     GdmFile();
     GdmFile(std::string path);
     Component get_comp();
+    std::string take_link(std::string &);
+    void take_branch_and_commit(std::string &, std::string &, std::string &);
     ~GdmFile();
 };
 

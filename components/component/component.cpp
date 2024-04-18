@@ -1,7 +1,7 @@
 #include "component.hpp"
 
 bool ComponentBroadcastUnit::operator==(const ComponentBroadcastUnit & input) const {
-    if ((address_in_project==input.address_in_project)&&(branch==input.branch))
+    if ((commit==input.commit)&&(branch==input.branch))
         return true;
     else 
         return false;
@@ -14,16 +14,10 @@ void Component::print_to_screen (){
     auto iterator  = get_comp_list().begin();
     for (std::size_t i=0; i<get_comp_list().size(); i++){
         std::cout<<"call "<<i+1<<":"<<std::endl;
-        std::cout<<"   "<<"project address: "<< comp_list[i].address_in_project <<std::endl;
         std::cout<<"   "<<"file call addr : "<< comp_list[i].address_call_file <<std::endl;
         std::cout<<"   "<<"branch:          "<< comp_list[i].branch <<std::endl;
+        std::cout<<"   "<<"commit:          "<< comp_list[i].commit <<std::endl;
         std::cout<<"   "<<"is force:        "<< comp_list[i].is_force <<std::endl;
-        /*
-        if (iterator->branch_type==BranchType::branch){
-            std::cout<<"   "<<"branch type"<<std::endl;
-        }
-        else {std::cout<<"   "<<"tag type"<<std::endl;}
-        */
         iterator=iterator++;
     }
 }
@@ -34,11 +28,7 @@ void Component::print_to_screen (){
     comp_list.push_back(temp);    
 }
 
-// void Component::add_call_source(const ComponentBroadcastUnit & input){
-    // comp_list.push_back(input);
-// }
-
-void Component::add_call_source(const ComponentBroadcastUnit input){
+void Component::add_call_source(const ComponentBroadcastUnit & input){
     comp_list.push_back(input);
 }
 
@@ -100,14 +90,13 @@ int Component::check_component() const {
     else return 0;
 }
 
-std::string Component::get_addr_in_project() const {
+std::string Component::get_commit() const {
     if (is_valid_force){
-        return comp_list[force_pos].address_in_project;
+        return comp_list[force_pos].commit;
     }
     else {
-        return comp_list[0].address_in_project;
+        return comp_list[0].commit;
     }
-    return "";
 }
 std::string Component::get_addr_call_file() const {
     if (is_valid_force){
@@ -116,7 +105,6 @@ std::string Component::get_addr_call_file() const {
     else {
         return comp_list[0].address_call_file;
     }
-    return "";
 }
 std::string Component::get_branch() const {
     if (is_valid_force){
@@ -125,5 +113,4 @@ std::string Component::get_branch() const {
     else {
         return comp_list[0].branch;
     }
-    return "";
 }

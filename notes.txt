@@ -1,1 +1,2 @@
 git clone --no-checkout --depth 1 https://github.com/torvalds/linux - позволит склонировать только head
+git ls-remote -h -- http://sofdev:3000/Industrial/UFC_Application.git HEAD - проверит наличие репы. вернет 128 в обратном случае
