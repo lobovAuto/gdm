@@ -2,7 +2,7 @@
 
 
 int main(int argc, char* argv[]){
-
+    //print_help();
     if (not std::filesystem::exists("./.gdm")){
         std::filesystem::create_directory("./.gdm");
     }

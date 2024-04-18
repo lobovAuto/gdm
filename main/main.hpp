@@ -9,3 +9,5 @@
 #include "gdm_file.hpp"
 #include "git_rri.hpp"
 #include "filesystem"
+
+void print_help();

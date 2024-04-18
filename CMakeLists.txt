@@ -69,6 +69,7 @@ set(INCLUDE_DIRECTORIES
 
 add_executable(${TARGET_NAME} 
     ${CMAKE_SOURCE_DIR}/main/main.cpp
+    ${CMAKE_SOURCE_DIR}/main/help.cpp
     ${CMAKE_SOURCE_DIR}/components/comp_struct/comp_struct.cpp
     ${CMAKE_SOURCE_DIR}/components/component/component.cpp
     ${CMAKE_SOURCE_DIR}/components/gdm_file/gdm_file.cpp
