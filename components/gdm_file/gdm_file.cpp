@@ -176,6 +176,31 @@ Component GdmFile::get_comp(){
     temp.print_for_log(log_stream);
     return temp;
 }
+
+bool GdmFile::get_comp(string & root_rms, string & root_folder,
+            string & repo_address, string & address_call_file, 
+            bool & is_full_path, string & branch, 
+            string & commit, bool & is_force){
+    if (file.eof()){
+        return false;
+    }
+    if (!garbage_string_skip()) return false; // пропускаем ненужные строки
+    std::string read_line;
+    getline(file, read_line);
+        log_stream<<"________________"<<std::endl;
+        log_stream<<"read string: "<<read_line<<std::endl;
+        log_stream<<"was parsing as: "<<std::endl;
+        
+    delete_key_word(read_line);
+    is_full_path =  take_link(read_line, repo_address);
+    take_branch_and_commit(read_line, branch, commit);
+    is_force = check_force(read_line);
+    root_rms = _root_rms;
+    root_folder = _root_folder;
+    address_call_file = path;
+    return true;
+}
+
 GdmFile::~GdmFile(){
 
 }

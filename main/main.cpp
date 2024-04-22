@@ -10,11 +10,21 @@ int main(int argc, char* argv[]){
     // std::clog.rdbuf(log.rdbuf());
     GdmFile project(log);
     ComponentsStruct comp_struct(log);
-    Component temp = project.get_comp();
 
-    while (temp.get_health()){
+    string root_rm, root_folder, repo_address, address_call_file, branch, commit;
+    bool is_full_path, is_force;
+    for (;;){
+        if (!project.get_comp(root_rm, root_folder, repo_address, 
+                                address_call_file, is_full_path, 
+                                branch, commit, is_force))
+        {
+            break;
+        }
+        Component temp(root_rm, root_folder, repo_address, 
+                        address_call_file, is_full_path, 
+                        branch, commit, is_force);
+        temp.print_for_log(log);
         comp_struct.add_component(temp);
-        temp = project.get_comp();
     }
     // comp_struct.check_struct_comp_to_reference();
     comp_struct.print_struct();

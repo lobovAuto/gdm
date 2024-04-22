@@ -3,12 +3,9 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+#include <algorithm>
 
 #include "component.hpp"
-#include "repo_addr_internet.hpp"
-#include "repo_addr_project.hpp"
-#include "repo_branch.hpp"
-#include "repo_hints.hpp"
 
 /*
 enum class GdmFileType{
@@ -36,6 +33,10 @@ public:
     GdmFile(std::ostream & log_stream);
     GdmFile(std::string path , std::ostream & log_stream);
     Component get_comp();
+    bool get_comp(string & root_rms, string & root_folder,
+            string & repo_address, string & address_call_file, 
+            bool & is_full_path, string & branch, 
+            string & commit, bool & is_force);
     bool take_link(std::string & in, std::string & link);
     void take_branch_and_commit(std::string &, std::string &, std::string &);
     bool check_force(std::string & in);
