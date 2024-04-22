@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
 
     string root_rm, root_folder, repo_address, address_call_file, branch, commit;
     bool is_full_path, is_force;
-    for (;;){
+    for (;;){   // Цикл, считывающий главный gdm файл
         if (!project.get_comp(root_rm, root_folder, repo_address, 
                                 address_call_file, is_full_path, 
                                 branch, commit, is_force))
