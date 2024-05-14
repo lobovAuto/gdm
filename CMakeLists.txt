@@ -81,3 +81,5 @@ target_compile_options(${TARGET_NAME} PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/W4>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic>
 )
+
+add_custom_command(TARGET ${TARGET_NAME} POST_BUILD COMMAND cp ${CMAKE_SOURCE_DIR}/help.txt ${CMAKE_SOURCE_DIR}/build/help.txt)
