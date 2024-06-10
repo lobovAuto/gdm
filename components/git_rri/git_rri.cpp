@@ -1,15 +1,17 @@
 #include "git_rri.hpp"
 
-GitRri::GitRri(/* args */)
+GitRri::GitRri(std::ostream & log_stream/* args */):log_stream(log_stream)
 {
 }
 
-GitRri::GitRri(std::string url, std::string addr, std::string branch): 
-                url(url), location(addr), branch(branch){
-    folder_name = get_folder_name();
+GitRri::GitRri(std::ostream & log_stream, std::string url, std::string addr, std::string branch, std::string commit):
+                log_stream(log_stream),
+                url(url), location(addr, 0, addr.find(".git")), branch(branch), commit(commit){
+    // folder_name = get_folder_name();
 }
 
-GitRri::GitRri(const Component & c):
+GitRri::GitRri(std::ostream & log_stream, const Component & c):
+    log_stream(log_stream),
     url(c.get_repo_address()), location(c.get_addr_call_file()),
     branch(c.get_branch()){
     folder_name = get_folder_name();
@@ -79,12 +81,12 @@ int GitRri::clone() {
     std::string command ="git clone "+url;
     command += " "+location;
     command += " -b "+branch;
+    log_stream<<command<<std::endl;
     int res = boost_command(command.c_str(), lines);
-    // for (std::string t : lines){
-        // std::cout<<t<<std::endl;
-    // }
-    // std::cout<<"res is: ";
-    // std::cout<<res<<std::endl;
-    
+    for (auto str:lines) log_stream<<str<<std::endl;
+    command = "git -C "+location+" checkout " + commit;
+    log_stream<<command<<std::endl;
+    res = boost_command(command.c_str(), lines);
+    for (auto str:lines) log_stream<<str<<std::endl;    
     return 0;
 }

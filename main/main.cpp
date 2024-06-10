@@ -5,7 +5,7 @@ int main(int argc, char* argv[]){
     // print_help();
     // return 0;
     if (not std::filesystem::exists("./.gdm")){
-        std::filesystem::create_directory("./.gdm");
+        std::filesystem::create_directory("./.gdm");    
     }
     std::ofstream log("./.gdm/log.txt");
     // std::clog.rdbuf(log.rdbuf());
@@ -25,14 +25,18 @@ int main(int argc, char* argv[]){
                         address_call_file, is_full_path, 
                         branch, commit, is_force);
         temp.print_for_log(log);
+        log<<"________________"<<std::endl;
         comp_struct.add_component(temp);
     }
-    // comp_struct.check_struct_comp_to_reference();
-    comp_struct.print_struct();
-    std::cout<<"check res: "<<comp_struct.check_struct()<<std::endl;
-    comp_struct.print_err_res();
-    // Rri * temp_repo = new GitRri("ssh://git@git.redpioneer.ru:2224/tools/dbc_agent.git","./temp/tools/dbc_agent");
-    // temp_repo->check_repo_to_gdm_files();
-    // temp->clone();
+    log<<"Parsing dependency files was completed!"<<std::endl;
+
+    if(!comp_struct.check_struct()){
+        return 1;
+    }
+
+    log<<"Download applicants:"<<std::endl;
+    comp_struct.print_all_paths();
+    log<<"Try to download ..."<<std::endl;
+    comp_struct.clone_all_components();
     
 }

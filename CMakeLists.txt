@@ -6,50 +6,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(TARGET_NAME gdm)
 
-#set(UNIX true)
-set(BUILD_TESTS false) #выключение тестов для более быстрой с борки libgit2
-#set(USE_SSH ON)
+
 include(FetchContent)
 
 
-#[===[
-Начало включения библиотеки fmt
-#]===]
-#FetchContent_Declare(
-#    fmt
-#    GIT_REPOSITORY git@github.com:fmtlib/fmt.git
-#    GIT_TAG 10.2.1 #последняя актуальная версия на 26 марта 2024 года
-#)
-
-#FetchContent_GetProperties(fmt)
-
-#if(NOT fmt_POPULATED)
-#    FetchContent_Populate(fmt)
-#    add_subdirectory(${fmt_SOURCE_DIR} ${fmt_BINARY_DIR})
-#endif()
-#[===[
-Окончание включния библиотеки fmt
-#]===]
-
-#[===[
-Начало включения библиотеки boost
-#]===]
-FetchContent_Declare(
-   boost
-   GIT_REPOSITORY git@github.com:boostorg/boost.git
-   GIT_TAG boost-1.84.0 #последняя актуальная версия на 26 марта 2024 года
-)
-
-FetchContent_GetProperties(boost)
-
-if(NOT boost_POPULATED)
-   FetchContent_Populate(boost)
-   add_subdirectory(${boost_SOURCE_DIR} ${boost_BINARY_DIR})
-endif()
-#[===[
-Окончание включния библиотеки boost
-#]===]
-
+add_subdirectory(/home/lobov/workspace/boost ${CMAKE_SOURCE_DIR}/build/__deps EXCLUDE_FROM_ALL)
 
 set(INCLUDE_DIRECTORIES
     ${CMAKE_SOURCE_DIR}
@@ -74,7 +35,6 @@ add_executable(${TARGET_NAME}
 
 target_include_directories(${TARGET_NAME} PRIVATE ${INCLUDE_DIRECTORIES})
 target_link_libraries(${TARGET_NAME} PRIVATE boost_process)
-#fmt boost_serialization libssh2
 
 
 target_compile_options(${TARGET_NAME} PRIVATE
@@ -83,3 +43,4 @@ target_compile_options(${TARGET_NAME} PRIVATE
 )
 
 add_custom_command(TARGET ${TARGET_NAME} POST_BUILD COMMAND cp ${CMAKE_SOURCE_DIR}/help.txt ${CMAKE_SOURCE_DIR}/build/help.txt)
+

@@ -14,6 +14,13 @@ enum class GdmFileType{
 };
 */
 
+enum class keyword{
+    ROOT_FOLDER,
+    ROOT_RMS,
+    LINK,
+    ERR=0,
+};
+
 class GdmFile
 {
 private:
@@ -25,7 +32,8 @@ private:
     bool _is_root_exist;
     std::string _root_folder = "NULL";
     std::string _root_rms = "NULL";
-    bool garbage_string_skip(); // пропускает неинтересующие нас строки
+    keyword garbage_string_skip(); // пропускает неинтересующие нас строки
+    keyword define_keyword(std::string &);
 
     unsigned int gssnsdl = 1000; // garbage_string_skip_no_space_dist_lim
 public:

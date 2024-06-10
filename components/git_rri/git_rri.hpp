@@ -15,16 +15,18 @@ class GitRri : public Rri
 {
 private:
     int boost_command(const char *, std::vector<std::string> &);
+    std::ostream & log_stream; // поток для вывода лога
     int last_result;
     std::string url;
     std::string location;
     std::string branch;
+    std::string commit;
     std::string folder_name; // имя папки для проверочного выкачивания
     const std::string get_folder_name();
 public:
-    GitRri(/* args */);
-    GitRri(std::string url, std::string location, std::string branch);
-    GitRri(const Component &);
+    GitRri(std::ostream & log_stream);
+    GitRri(std::ostream & log_stream, std::string url, std::string location, std::string branch, std::string commit);
+    GitRri(std::ostream & log_stream, const Component &);
     int push();
     int pull();
     int check_repo_to_gdm_file();

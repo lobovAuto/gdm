@@ -6,23 +6,76 @@ void delete_first_spaces(std::string & input){
     input = temp;
 }
 
+void delete_end_line_spaces(std::string & input){
+    if (input.find_first_of(" ")!=std::string::npos){
+    input.erase(input.find_first_of(" "), input.length());
+    }
+}
+
 void delete_key_word(std::string & input){
     if (input.find("LINK")<1000){
         input.erase(input.find("LINK"), 5);
     }
 }
 
+void delete_key_word(std::string & input, const char * key){
+    if (input.find(key)<1000){
+        delete_first_spaces(input);
+        input.erase(input.find(key), input.find_first_of(" ")+1);
+    }
+}
+
+keyword GdmFile::define_keyword(std::string & buffer){
+    if (buffer.find("LINK")<1000) return keyword::LINK;
+    else if (buffer.find("ROOT_RMS")<1000) return keyword::ROOT_RMS;
+    else if (buffer.find("ROOT_FOLDER")<1000) return keyword::ROOT_FOLDER;
+    else return keyword::ERR;
+}
+
+/**
+ * @brief Конструктор главного файла проекта
+*/
 GdmFile::GdmFile(std::ostream & log_stream):log_stream(log_stream){
     log_stream<<"Opening main project file..."<<std::endl;
     file.open("project.gdm");
     if(not file.is_open()){
+        log_stream<<"There is no main project file."<<std::endl;
         std::cerr<<"There is no main project file."<<std::endl;
         exit(1);
     }
+    log_stream<<"Main project file has been sucsessfully opened."<<std::endl;
     is_file = true;
     path = std::filesystem::absolute(std::filesystem::path("project.gdm"));
+    keyword _return=garbage_string_skip();
+    while ((_return==keyword::ROOT_FOLDER)||(_return==keyword::ROOT_RMS)){
+        std::string buffer;
+        getline(file, buffer);
+        switch (_return)
+        {
+        case keyword::ROOT_FOLDER:
+            delete_key_word(buffer, "ROOT_FOLDER");
+            delete_end_line_spaces(buffer);
+            buffer.erase(0, buffer.find_first_not_of("/"));
+            _root_folder=buffer;
+            log_stream<<"root folder was set as: "<<_root_folder<<std::endl;
+            break;
+        case keyword::ROOT_RMS:
+            delete_key_word(buffer, "ROOT_RMS");
+            delete_end_line_spaces(buffer);
+            _root_rms=buffer;
+            log_stream<<"root rms was set as: "<<_root_rms<<std::endl;
+            break;
+        default:
+            break;
+        }
+        _return=garbage_string_skip();
+
+    }
 }
 
+/**
+ * @brief Конструктор файла компонента проекта
+*/
 GdmFile::GdmFile(std::string in_path, std::ostream & log_stream):log_stream(log_stream){
     std::string curr_path = in_path + "component.gdm";
     file.open(curr_path);
@@ -32,7 +85,10 @@ GdmFile::GdmFile(std::string in_path, std::ostream & log_stream):log_stream(log_
     path = std::filesystem::absolute(std::filesystem::path(curr_path));
 }
 
-bool GdmFile::garbage_string_skip(){
+/**
+ * @brief  Метод пропускает в обрабатываемом файле пустые строки, комментарии и т.п.
+*/
+keyword GdmFile::garbage_string_skip(){
     std::string buffer;           // буффер для считывания
     std::streampos position;        // переменная с текущей позицей в файле
     unsigned int safety_counter=0;
@@ -40,51 +96,28 @@ bool GdmFile::garbage_string_skip(){
         position = file.tellp(); // запоминаем текущую позицию в файле
         safety_counter++;
         getline(file, buffer);
+        log_stream<<"Read line: "<<buffer<<std::endl;
         bool flag_1 = buffer.find_first_not_of(" ")<gssnsdl;        // если первый символ не очень далеко
         bool flag_2 = buffer[buffer.find_first_not_of(" ")]!='#';   // если первый символ - не символ комментария
         bool flag_3 = buffer.find("LINK")<gssnsdl;                  // Если строка начинается с LINK
-        if (flag_1 && flag_2 && flag_3) {
+        bool flag_4 = buffer.find("ROOT_FOLDER")<gssnsdl;           // Если в строке есть ROOT_FOLDER
+        bool flag_5 = buffer.find("ROOT_RMS")<gssnsdl;              // Если в строке есть ROOT_RMS
+        if (flag_1 && flag_2 && (flag_3 || flag_4 || flag_5)) {
+            keyword temp;
+            log_stream<<"Line was recognized as correct"<<std::endl;
+            if (flag_3) temp = keyword::LINK;
+            else if (flag_4) temp = keyword::ROOT_FOLDER;
+            else if (flag_5) temp = keyword::ROOT_RMS;
             file.seekp(position);
+            return temp;
             break;
         }
         if (position==-1) {
-            return false;
+            return keyword::ERR;
         }
     }
-    return true;
 }
 
-// Component GdmFile::get_comp(){
-    // if (file.eof()){
-        // return Component();
-    // }
-    // garbage_string_skip(); // пропускаем ненужные строки
-    // std::string read_line;
-    // getline(file, read_line);
-        // std::cout<<"read string: "<<read_line<<std::endl;
-    // delete_first_spaces(read_line); //вероятно, эту строку можно удалять
-    // delete_key_word(read_line);
-        // std::cout<<"updt string: "<<read_line<<std::endl;
-    // repo_::RepoAddrInternet repo_addr_intenet(std::string(read_line, 0, read_line.find_first_of(" ")));
-        // if (repo_addr_intenet.check_addr()==false){
-            // return Component();
-        // }
-    // read_line.erase(0,read_line.find_first_of(" ")+1);
-        // std::cout<<"cut string: "<<read_line<<std::endl;
-    // repo_::RepoAddrProject repo_addr_project(std::string(read_line, 0, read_line.find_first_of(" ")));
-    // read_line.erase(0,read_line.find_first_of(" ")+1);
-        // std::cout<<"cut string: "<<read_line<<std::endl;
-    // repo_::RepoBranch repo_branch(std::string(read_line, 0, read_line.find_first_of(" ")));
-        // std::cout<<"cut string: "<<read_line<<std::endl;
-    // repo_::RepoHints repo_hints(read_line);
-    // bool isforce = repo_hints.isforce();
-    // if (is_project_file == false) isforce = 0;
-    // return Component(repo_addr_intenet.return_addr(),
-                        // path,
-                        // repo_branch.return_branch(),
-                        // repo_commit.return_branch(),
-                        // isforce);
-// }
 
 /**
  * Возвращает ДА, если ссылка с полным путем
@@ -115,6 +148,7 @@ void GdmFile::take_branch_and_commit(std::string & in, std::string & branch, std
         }
         else commit_length = space_pos-slash_pos;   // Иначе - разница между позицией пробела и слэша
         commit = in.substr(slash_pos+1,commit_length);
+        if (commit=="head") commit = "HEAD";
         in.erase(0,branch.size()+commit.size()+1); // стерли из считанной строки ветку и комит
         return;
     }
@@ -158,7 +192,7 @@ Component GdmFile::get_comp(){
     if (file.eof()){
         return Component();
     }
-    if (!garbage_string_skip()) return Component(); // пропускаем ненужные строки
+    if (garbage_string_skip()==keyword::ERR) return Component(); // пропускаем ненужные строки
     std::string read_line;
     getline(file, read_line);
         log_stream<<"________________"<<std::endl;
@@ -182,13 +216,14 @@ bool GdmFile::get_comp(string & root_rms, string & root_folder,
             bool & is_full_path, string & branch, 
             string & commit, bool & is_force){
     if (file.eof()){
+        log_stream<<"The end of the file has been reached"<<std::endl;
         return false;
     }
-    if (!garbage_string_skip()) return false; // пропускаем ненужные строки
+    if (garbage_string_skip()==keyword::ERR) return false; // пропускаем ненужные строки
     std::string read_line;
     getline(file, read_line);
-        log_stream<<"________________"<<std::endl;
-        log_stream<<"read string: "<<read_line<<std::endl;
+        // log_stream<<"________________"<<std::endl;
+        // log_stream<<"read string: "<<read_line<<std::endl;
         log_stream<<"was parsing as: "<<std::endl;
         
     delete_key_word(read_line);

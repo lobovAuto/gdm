@@ -143,3 +143,14 @@ std::string Component::get_branch() const {
         return comp_list[0].branch;
     }
 }
+
+void Component::set_repo_address () {
+    std::string temp = _root_rms;
+    if (_is_full_path){
+        temp+="/"+local_address;
+    }
+    else {
+        temp+="/"+_root_folder+"/"+local_address;
+    } 
+    repo_address = temp;
+}

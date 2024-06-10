@@ -40,11 +40,19 @@ void ComponentsStruct::print_err_res(){
 bool ComponentsStruct::check_struct(){
     for(size_t i=0; i<components.size(); i++){  
         int check_result = components[i].check_component();
-        if (check_result){ comp_err.push_back(true); } // если есть ошибка, то ставим true
+        if (check_result){ 
+            std::cerr<<"Error!"<<std::endl;
+            std::cerr<<"Component "<<components[i].get_repo_address()<<std::endl;
+            std::cerr<<"Called from: "<<components[i].get_addr_call_file()<<std::endl;
+            std::cerr<<"It has different call parameters"<<std::endl;
+            comp_err.push_back(true); } // если есть ошибка, то ставим true
         else { comp_err.push_back(false);}
     }
     for (bool i : comp_err){
-        if (i == true) return false; // если хотя бы в одном компоненте есть ошибка, выдаем общую ошибку
+        if (i == true) { // если хотя бы в одном компоненте есть ошибка, выдаем общую ошибку
+            return false;
+        }
+
     }
     return true;
 }
@@ -54,7 +62,7 @@ int ComponentsStruct::check_struct_comp_to_reference(){
         int check_res = components[i].check_component(); // проверяем компонент на коллизии версий
         if (check_res) continue; // если есть ошибки, то пропускаем этот компонет
         
-        GitRri temp_repo(components[i]);
+        GitRri temp_repo(log_stream, components[i]);
         int res = temp_repo.check_repo_to_gdm_file();
         if (res){ // если есть подзависимости, парсим их
             GdmFile gdm_component(".dgm/temp_repo.get_folder_name()/", log_stream);
@@ -78,7 +86,7 @@ int ComponentsStruct::check_struct_comp_to_reference(){
 int ComponentsStruct::clone_all_components(){
     int i = 0;
     for(Component j : components){
-        GitRri temp_repo(j);
+        GitRri temp_repo(log_stream,j.get_repo_address(), j.get_local_address(), j.get_branch(), j.get_commit());
         i = temp_repo.clone();
     }
     return 0;

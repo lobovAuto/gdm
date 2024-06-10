@@ -16,6 +16,12 @@ public:
     bool check_struct();
     int check_struct_comp_to_reference(); // проверяет все элементы структуры на ссылочные зависимости
     int clone_all_components(); // скачивает все компоненты
+
+    void print_all_paths(){
+        for (Component i:components){
+            log_stream<<i.get_repo_address()<<std::endl;
+        }
+    }
 private:
     std::ostream & log_stream; // поток для вывода лога
     unsigned find_component(const Component &) const; // проверить массив на наличие такого компонента
