@@ -4,8 +4,7 @@ ROOT_RMS ssh://git@git.redpioneer.ru:2224 # Repository Manage System
 # комментарий
 LINK logic/drivers/stepper.git                  main/head
 LINK logic/drivers/stepper.git                  main/head
-LINK //embedded/logic/drivers/stepper.git       main/head
-LINK //tools/dbc_agent.git                      main/bed force
-LINK //tools/dbc_agent.git                      main/head force
+LINK //embedded/logic/drivers/stepper.git       main/HEAD
+LINK //tools/dbc_agent.git                      main/HEAD force
 LINK //tools/dbc_agent.git                      main head
 LINK //tools/dbc_agent.git                      main
